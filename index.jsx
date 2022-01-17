@@ -11,7 +11,6 @@ function createElement(tagName, attrs = {}, ...children) {
 
 window.bloggrs = new window.bloggrs.Bloggrs("fa1dc96f-2136-4c0c-bdbc-95a4f4b7d4fb");;
 
-
 class CategoriesListWidget extends HTMLElement {
   constructor() {
     super();
@@ -28,7 +27,6 @@ class CategoriesListWidget extends HTMLElement {
     Object.assign(this.state, obj);
     this._render();
   };
-
   _render = () => {
     const style = this.getStyleElement;
     const element = this.render()
