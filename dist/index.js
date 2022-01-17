@@ -1,26 +1,3 @@
-class BloggrsAPI {
-  constructor({
-    blog_id,
-    secret
-  }) {
-    this.blog_id = blog_id;
-    this.secret = secret;
-    this.base_url = "http://localhost:5500/api/v1";
-  }
-
-  async getCategories(options) {
-    console.log(options, options);
-    const res = await fetch(`${this.base_url}/blogs/${this.blog_id}/categories`);
-    const {
-      data: {
-        categories
-      }
-    } = await res.json();
-    return categories;
-  }
-
-}
-
 function createElement(tagName, attrs = {}, ...children) {
   const elem = Object.assign(document.createElement(tagName), attrs);
 
@@ -31,7 +8,8 @@ function createElement(tagName, attrs = {}, ...children) {
   return elem;
 }
 
-window.bloggrs = new window.bloggrs.Bloggrs("fa1dc96f-2136-4c0c-bdbc-95a4f4b7d4fb");;
+window.bloggrs = new window.bloggrs.Bloggrs("fa1dc96f-2136-4c0c-bdbc-95a4f4b7d4fb");
+;
 
 class CategoriesListWidget extends HTMLElement {
   constructor() {
@@ -41,12 +19,15 @@ class CategoriesListWidget extends HTMLElement {
       categories: []
     };
   }
+
   setState = obj => {
-    if (typeof(obj) !== "object") {
-      console.error("setState not called properly")
+    if (typeof obj !== "object") {
+      console.error("setState not called properly");
       return;
     }
+
     Object.assign(this.state, obj);
+
     this._render();
   };
   _render = () => {
@@ -62,30 +43,43 @@ class CategoriesListWidget extends HTMLElement {
       this_root.append(root_div);
     } else this.append(root_div);
   };
+
   connectedCallback() {
     this.fetchData();
+
     this._render();
   }
+
   async fetchData() {
-    this.setState({ loading: true })
+    this.setState({
+      loading: true
+    });
     const args = {};
     const size = this.getAttribute("size");
     if (size) args.pageSize = size;
     const categories = await window.bloggrs.categories.getCategories(args);
-    this.setState({ categories, loading: false })
+    this.setState({
+      categories,
+      loading: false
+    });
   }
+
   getCategoriesListElements = () => {
     const display_posts_count = (this.getAttribute("display_posts_count") || "false") === "true";
     return this.state.categories.map(ctg => createElement("li", null, ctg.name, " ", display_posts_count ? `(${ctg.meta.posts_count})` : ''));
   };
+
   static get observedAttributes() {
     return ['title', 'display_posts_count', 'size'];
   }
+
   attributeChangedCallback(name, oldValue, newValue) {
     console.log('Custom square element attributes changed.', name, oldValue, newValue);
+
     switch (name) {
       case "title":
         return this._render();
+
       case "display_posts_count":
         return this._render();
 
@@ -93,6 +87,7 @@ class CategoriesListWidget extends HTMLElement {
         return this.fetchData();
     }
   }
+
   render() {
     const title = this.getAttribute("title");
     const {
