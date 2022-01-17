@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>jsx WITHOUT react</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css"
+    />
+    <script src="http://localhost:4444/dist/bloggrs.umd.js"></script>
+    <link href="http://localhost:3001/dist/output.css" rel="stylesheet" />
+
+  </head>
+  <script>
+// class ConfirmLink extends HTMLElement {
+//     constructor() {
+//       super();
+//       this.attachShadow({ mode: "open" });
+//       this._$a = null;
+//     }
+//     connectedCallback() {
+//       const href = this.getAttribute("href") || "#";
+//       this.shadowRoot.innerHTML = `
+//         <a href="${href}">
+//           <slot></slot>
+//         </a>
+//       `;
+//       this._$a = this.shadowRoot.querySelector("a");
+//       this._$a.addEventListener("click", e => {
+//         const result = confirm(`Are you sure you want to go to '${href}'?`);
+//         if (!result) e.preventDefault();
+//       });
+//     }
+//     static get observedAttributes() { return ["href"]; }
+//     attributeChangedCallback(name, oldValue, newValue) {
+//       if (oldValue !== newValue) {
+//         if (this._$a === null) return;
+//         this._$a.setAttribute("href", newValue);
+//       }
+//     }
+//   }
+  
+//   customElements.define("confirm-link", ConfirmLink);
+  </script>
+  <body class="bg-slate-100">
+    <div id="app" class=""></div>
+      <categories-list-widget title="Categories" size="2" display_posts_count="true"/>
+    <!-- <confirm-link href="http://facebook.com" name="Facebook">
+      dsadaas
+    </confirm-link> -->
+    <script src="dist/index.js"></script>
+  </body>
+  <script>
+    setTimeout(() => {
+      // document.querySelector("categories-list-widget").setAttribute("size", "55")
+      // document.querySelector("categories-list-widget").setAttribute("title", "55")
+      // document.querySelector("categories-list-widget").setAttribute("display_posts_count", "true")
+    }, 1000)
+  </script>
+
+</html>
