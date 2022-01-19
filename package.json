@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx babel index.jsx -d dist"
+    "start": "npx babel index.jsx -d dist",
+    "dev": "npx babel-watch index.jsx -d dist"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +16,8 @@
     "@babel/core": "^7.16.7",
     "@babel/plugin-transform-react-jsx": "^7.16.7",
     "moment": "^2.29.1"
+  },
+  "devDependencies": {
+    "babel-watch": "^7.7.0"
   }
 }

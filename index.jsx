@@ -155,13 +155,16 @@ class PostsListWidget extends HTMLElement {
     const title = this.getAttribute("title")
     const { loading, categories } = this.state
     return (
-      <div className="grid grid-col-3 grid-flow-row col-span-2 gap-4">
+      <div className="h-full grid grid-col-3 grid-flow-row col-span-2 gap-4">
         { loading ? "Loading..." : '' }
         { this.state.categories.length ? '' : 'No posts to show'}
         {
-          this.state.categories.map(post => {
+          this.state.categories.map((post, pIndex) => {
             return (
-              <div className="border-b-2 border-b-slate-300 col-span-3 h-full flex">
+              <div className={`
+                ${pIndex === (this.state.categories.length - 1) ? '' : 'border-b-2'}
+                border-b-slate-300 col-span-3 h-full flex
+              `}>
                 <div className="bg-white shadow-md h-3/4 w-1/2 rounded-md" />
                 <div className="px-3 h-3/4 w-3/4">
                   <h1 className="text-slate-700 font-medium text-xl">
@@ -171,7 +174,7 @@ class PostsListWidget extends HTMLElement {
                     {post.html_content}
                   </p>
                   <div className="flex">
-                    <p className="ml-24text-slate-700 font-normal text-sm">
+                    <p className="ml-24 text-slate-700 font-normal text-sm">
                       {moment(post.createdAt).format("dddd, DD MMMM, YYYY")} &nbsp;&nbsp;&nbsp; |
                       {/* Wednesday, December 22, 2021 &nbsp;&nbsp;&nbsp; | */}
                     </p>

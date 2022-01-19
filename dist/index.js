@@ -192,10 +192,13 @@ class PostsListWidget extends HTMLElement {
       categories
     } = this.state;
     return createElement("div", {
-      className: "grid grid-col-3 grid-flow-row col-span-2 gap-4"
-    }, loading ? "Loading..." : '', this.state.categories.length ? '' : 'No posts to show', this.state.categories.map(post => {
+      className: "h-full grid grid-col-3 grid-flow-row col-span-2 gap-4"
+    }, loading ? "Loading..." : '', this.state.categories.length ? '' : 'No posts to show', this.state.categories.map((post, pIndex) => {
       return createElement("div", {
-        className: "border-b-2 border-b-slate-300 col-span-3 h-full flex"
+        className: `
+                ${pIndex === this.state.categories.length - 1 ? '' : 'border-b-2'}
+                border-b-slate-300 col-span-3 h-full flex
+              `
       }, createElement("div", {
         className: "bg-white shadow-md h-3/4 w-1/2 rounded-md"
       }), createElement("div", {
@@ -207,7 +210,7 @@ class PostsListWidget extends HTMLElement {
       }, post.html_content), createElement("div", {
         className: "flex"
       }, createElement("p", {
-        className: "ml-24text-slate-700 font-normal text-sm"
+        className: "ml-24 text-slate-700 font-normal text-sm"
       }, moment(post.createdAt).format("dddd, DD MMMM, YYYY"), " \xA0\xA0\xA0 |"), createElement("p", {
         className: "mx-4 text-slate-700 font-normal text-sm"
       }, post.users.first_name.capitalize(), " ", post.users.last_name.capitalize())), createElement("div", {
