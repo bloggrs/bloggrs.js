@@ -47,6 +47,7 @@ class CategoriesListWidget extends HTMLElement {
     root_div.id = "root";
     root_div.append(element);
     this.innerHTML = root_div.innerHTML;
+    this.style = "width: 100%";
   };
 
   connectedCallback() {
@@ -99,7 +100,7 @@ class CategoriesListWidget extends HTMLElement {
       loading
     } = this.state;
     return createElement("div", {
-      className: "mb-14 bg-white shadow-md rounded-md justify-center"
+      className: "mb-14 bg-white shadow-md max-h-1/2 w-3/4 rounded-md justify-center"
     }, createElement("div", {
       className: " mx-6"
     }, title ? createElement("h1", {
@@ -191,14 +192,16 @@ class PostsListWidget extends HTMLElement {
       loading,
       categories
     } = this.state;
+    const first_div_class = {
+      0: 'border-b-2 border-b-slate-300 col-span-3 h-full flex',
+      1: 'border-b-2 my-4 border-b-slate-300 col-span-3 flex',
+      2: 'col-span-3 my-8 h-full flex'
+    };
     return createElement("div", {
-      className: "h-full grid grid-col-3 grid-flow-row col-span-2 gap-4"
+      className: "grid grid-rows-3 grid-flow-col col-span-2 gap-4"
     }, loading ? "Loading..." : '', this.state.categories.length ? '' : 'No posts to show', this.state.categories.map((post, pIndex) => {
       return createElement("div", {
-        className: `
-                ${pIndex === this.state.categories.length - 1 ? '' : 'border-b-2'}
-                border-b-slate-300 col-span-3 h-full flex
-              `
+        className: first_div_class[pIndex]
       }, createElement("div", {
         className: "bg-white shadow-md h-3/4 w-1/2 rounded-md"
       }), createElement("div", {
@@ -207,7 +210,7 @@ class PostsListWidget extends HTMLElement {
         className: "text-slate-700 font-medium text-xl"
       }, post.title), createElement("p", {
         className: "py-2 text-slate-400 font-normal text-sm"
-      }, post.html_content), createElement("div", {
+      }, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer"), createElement("div", {
         className: "flex"
       }, createElement("p", {
         className: "ml-24 text-slate-700 font-normal text-sm"
@@ -362,6 +365,9 @@ class HeaderWidget extends HTMLElement {
       src: "http://localhost:3001/dist/static/logo-placeholder-image.png",
       alt: "Workflow"
     }), createElement("img", {
+      style: {
+        width: '12rem'
+      },
       className: "hidden absolute lg:block h-32 w-auto h-auto",
       style: {
         width: '12rem'

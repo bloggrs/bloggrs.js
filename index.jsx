@@ -44,6 +44,7 @@ class CategoriesListWidget extends HTMLElement {
     root_div.id = "root"
     root_div.append(element);
     this.innerHTML = root_div.innerHTML
+    this.style = "width: 100%";
   }
   connectedCallback(){
     this.fetchData();
@@ -76,7 +77,7 @@ class CategoriesListWidget extends HTMLElement {
     const title = this.getAttribute("title")
     const { loading } = this.state
     return (
-      <div className="mb-14 bg-white shadow-md rounded-md justify-center">
+      <div className="mb-14 bg-white shadow-md max-h-1/2 w-3/4 rounded-md justify-center">
           <div className=" mx-6">
             {
               title ?
@@ -123,6 +124,7 @@ class PostsListWidget extends HTMLElement {
     root_div.id = "root"
     root_div.append(element);
     this.innerHTML = root_div.innerHTML
+    // console.log("DDDD", this, this.style)
   }
   connectedCallback(){
     this.fetchData();
@@ -154,24 +156,28 @@ class PostsListWidget extends HTMLElement {
   render() {
     const title = this.getAttribute("title")
     const { loading, categories } = this.state
+    const first_div_class = {
+      0: 'border-b-2 border-b-slate-300 col-span-3 h-full flex',
+      1: 'border-b-2 my-4 border-b-slate-300 col-span-3 flex',
+      2: 'col-span-3 my-8 h-full flex'
+    }
     return (
-      <div className="h-full grid grid-col-3 grid-flow-row col-span-2 gap-4">
+      <div className="grid grid-rows-3 grid-flow-col col-span-2 gap-4">
         { loading ? "Loading..." : '' }
         { this.state.categories.length ? '' : 'No posts to show'}
         {
           this.state.categories.map((post, pIndex) => {
             return (
-              <div className={`
-                ${pIndex === (this.state.categories.length - 1) ? '' : 'border-b-2'}
-                border-b-slate-300 col-span-3 h-full flex
-              `}>
+              <div className={first_div_class[pIndex]}>
                 <div className="bg-white shadow-md h-3/4 w-1/2 rounded-md" />
                 <div className="px-3 h-3/4 w-3/4">
                   <h1 className="text-slate-700 font-medium text-xl">
                     {post.title}
                   </h1>
                   <p className="py-2 text-slate-400 font-normal text-sm">
-                    {post.html_content}
+                    {/* {post.html_content} */}
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+
                   </p>
                   <div className="flex">
                     <p className="ml-24 text-slate-700 font-normal text-sm">
@@ -303,7 +309,7 @@ class HeaderWidget extends HTMLElement {
             <div className="flex-1 flex items-center justify-center sm:justify-start">
               <div className="w-9/12 flex-shrink-0 flex items-center">
                 <img className="block w-40 lg:hidden h-8 w-auto h-auto" src="http://localhost:3001/dist/static/logo-placeholder-image.png" alt="Workflow" />
-                <img className="hidden absolute lg:block h-32 w-auto h-auto" style={{width: '12rem'}} src="http://localhost:3001/dist/static/logo-placeholder-image.png" alt="Workflow" />
+                <img style={{ width: '12rem' }} className="hidden absolute lg:block h-32 w-auto h-auto" style={{width: '12rem'}} src="http://localhost:3001/dist/static/logo-placeholder-image.png" alt="Workflow" />
                 <h1 className="text-xl lg:px-52 md:px-22 font-bold text-slate-700">{this.state.categories.blog.name}</h1>
               </div>
               <div className="w-3/12 hidden sm:block sm:ml-6">
