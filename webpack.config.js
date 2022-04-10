@@ -34,7 +34,7 @@ module.exports = {
   output: {
     filename: "index.js",
     path: path.resolve(__dirname, "build"),
-    library: "bloggrs",
+    library: "Bloggrs",
     libraryTarget: "umd",
     clean: true,
   },

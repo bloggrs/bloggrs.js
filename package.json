@@ -1,6 +1,6 @@
 {
   "name": "@bloggrs/bloggrsjs",
-  "version": "0.0.1",
+  "version": "0.0.6",
   "description": "bloggrs.js is a JavaScript library for building performant and custom blog platforms with Bloggrs.",
   "main": "build/index.js",
   "scripts": {
